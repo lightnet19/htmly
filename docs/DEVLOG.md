@@ -4,29 +4,29 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
-## 📅 2026-08-08 — Phase 2 Ext: Full Coverage REST API v1 Suite
+## 📅 2026-08-08 — Phase 3: Automation Webhooks & MCP Server Package
 
-### Complete API Endpoints Suite (`system/api/v1/`)
-- **`system/api/v1/pages.php`**: Controller untuk `GET /api/v1/pages`, `POST /api/v1/pages`, dan `DELETE /api/v1/pages/{slug}`.
-- **`system/api/v1/taxonomy.php`**: Controller untuk `GET /api/v1/categories`, `POST /api/v1/categories`, dan `GET /api/v1/tags`.
-- **`system/api/v1/media.php`**: Controller untuk `POST /api/v1/media/upload` (Multipart upload dengan validasi ekstensi & format markdown snippet auto-generation).
-- **`system/api/v1/system.php`**: Controller untuk `GET /api/v1/system/health` (Telemetri server, PHP version, disk space, total posts/drafts/pages, cache size).
-- **`system/api/v1/router.php`**: Diperbarui untuk mendukung routing lengkap ke seluruh controller baru.
-- **`docs/API_SPECIFICATION.md`**: Diperbarui dengan tabel matriks spesifikasi REST API v1 Full Coverage.
+### 1. Webhook Event Dispatcher (`system/core/Webhook.php`)
+- **`config/webhooks.ini`**: Konfigurasi URL Webhook (misalnya endpoint n8n Webhook Trigger).
+- **`system/core/Webhook.php`**: Mengimplementasikan `dispatch_webhook_event($event, $payload)` non-blocking cURL/Stream Context dispatcher untuk mengirim peristiwa HTTP POST saat post dipublish/dihapus.
+
+### 2. Standalone MCP Server Package (`mcp-server/`)
+- Membangun executable Node.js MCP Server resmi berbasis Stdio JSON-RPC.
+- Menyediakan tools: `htmly_publish_post`, `htmly_list_posts`, `htmly_delete_post`, `htmly_get_system_health`.
+- Memungkinkan AI Agent (**Hermes-Agent**, **OpenClaw**, **Antigravity**, **Cursor**) terhubung langsung ke HTMLy secara otonom.
 
 ---
 
-## 📅 2026-08-08 — Phase 2: REST API v1 Engine Core Implementation
+## 📅 2026-08-08 — Phase 2 Ext: Full Coverage REST API v1 Suite
 
-### 1. Core Modules
-- `config/api_keys.ini`: Konfigurasi token API Key.
-- `system/api/v1/auth.php`: Bearer token authentication guard (`hash_equals()`).
-- `system/api/v1/posts.php`: Posts & Drafts API handler.
-- `system/htmly.php`: REST API Interceptor.
+### Complete API Endpoints Suite (`system/api/v1/`)
+- `pages.php`: Pages API controller.
+- `taxonomy.php`: Categories & Tags API controller.
+- `media.php`: Media Upload API controller.
+- `system.php`: Telemetry & Health API controller.
+- `router.php`: Full API router.
 
 ---
 
 ## 📅 2026-08-08 — Phase 1: Security Fix & Initial 2026 Modernization Planning
-
-### 1. Fix Issue #1058 (Draft Delete Bug)
-- Menambahkan validasi path `/draft/` dan pengecekan ekstensi `.md` pada `delete_post()`.
+- Fix Issue #1058 (Draft Delete Safety Guard) & Seluruh Dokumentasi Perencanaan (`docs/`).
