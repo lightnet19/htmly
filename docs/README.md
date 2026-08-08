@@ -16,3 +16,11 @@ Direktori ini berisi seluruh dokumen perencanaan, arsitektur, spesifikasi API, s
    - Spesifikasi MCP Server untuk AI Agent seperti Hermes-Agent, OpenClaw, dan Antigravity.
 6. [AI Agent Guidelines (AI_AGENT_GUIDELINES.md)](./AI_AGENT_GUIDELINES.md)
    - Instruksi dan aturan khusus bagi AI Agent saat membaca dan mengembangkan codebase HTMLy.
+7. [Agentic AI System Prompt & Rules (AGENTS.md)](./AGENTS.md)
+   - Aturan operasional dan instruksi tingkat tinggi untuk AI Agentic Framework.
+8. [Development Roadmap & Plan (DEVPLAN.md)](./DEVPLAN.md)
+   - Roadmap pengembangan bertahap (Phases, Gantt Chart, Task Lists).
+9. [UI/UX Design System Guidelines (DESIGN.md)](./DESIGN.md)
+   - Sistem desain UI modern 2026 (Dark Mode, Glassmorphism, CSS Custom Properties, Command Palette).
+10. [Development Activity Log (DEVLOG.md)](./DEVLOG.md)
+    - Catatan harian aktivitas pengembang & keputusan teknis.
