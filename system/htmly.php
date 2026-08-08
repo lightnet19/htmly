@@ -4795,8 +4795,12 @@ post('/'. permalink_type() .'/:name/delete', function () {
         $arr = explode('/', $file); 
         $user = $_SESSION[site_url()]['user'];
         $role = user('role', $user);
+        // Detect whether the file being deleted lives in a /draft/ folder so
+        // delete_post() can enforce that only actual draft files are removed
+        // when the request originates from the draft list. (Issue #1058)
+        $is_draft = (strpos(str_replace('\\', '/', $file), '/draft/') !== false);
         if ($user === $arr[1] || $role === 'editor' || $role === 'admin') {
-            delete_post($file, $destination);
+            delete_post($file, $destination, $is_draft);
         } else {
             $redir = site_url();
             header("location: $redir");    
@@ -6064,8 +6068,12 @@ post('/:year/:month/:name/delete', function () {
         $arr = explode('/', $file); 
         $user = $_SESSION[site_url()]['user'];
         $role = user('role', $user);
+        // Detect whether the file being deleted lives in a /draft/ folder so
+        // delete_post() can enforce that only actual draft files are removed
+        // when the request originates from the draft list. (Issue #1058)
+        $is_draft = (strpos(str_replace('\\', '/', $file), '/draft/') !== false);
         if ($user === $arr[1] || $role === 'editor' || $role === 'admin') {
-            delete_post($file, $destination);
+            delete_post($file, $destination, $is_draft);
         }
     }
 });
