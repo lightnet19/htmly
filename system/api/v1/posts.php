@@ -14,7 +14,7 @@ function api_get_posts()
     if ($status === 'draft') {
         $posts = get_draft_posts();
     } else {
-        $posts = get_all_posts();
+        $posts = get_blog_posts();
     }
 
     if (empty($posts)) {
@@ -80,6 +80,13 @@ function api_create_post($auth)
     $content = $body['content'] ?? null;
     $category = $body['category'] ?? 'uncategorized';
     $tags = $body['tags'] ?? '';
+
+    // Tags wajib minimal satu — add_content() melewati penulisan file
+    // jika $post_tag kosong (silent success tanpa file, lihat issue #2).
+    // Default ke 'uncategorized' agar post tetap tersimpan.
+    if (empty(trim($tags))) {
+        $tags = 'uncategorized';
+    }
     $status = $body['status'] ?? 'published';
     $description = $body['description'] ?? null;
 
@@ -91,7 +98,7 @@ function api_create_post($auth)
     $url = remove_accent($title);
     $type = 'post';
     $draft = ($status === 'draft') ? 'draft' : null;
-    $dateTime = date('Y-m-d-H-i-s');
+    $dateTime = date('Y-m-d H:i:s');
 
     // Call internal HTMLy helper
     add_content($title, $tags, $url, $content, $user, $draft, $category, $type, $description, null, $dateTime);
@@ -123,7 +130,7 @@ function api_delete_post($slug)
         api_error('Invalid slug parameter', 400, 'INVALID_SLUG');
     }
 
-    $posts = get_all_posts();
+    $posts = get_blog_posts();
     $targetFile = null;
 
     foreach ($posts as $p) {

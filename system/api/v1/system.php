@@ -6,7 +6,7 @@ if (!defined('HTMLY')) die('HTMLy Direct Access Denied');
  */
 function api_get_system_health()
 {
-    $posts = get_all_posts();
+    $posts = get_blog_posts();
     $drafts = get_draft_posts();
     $pages = get_static_pages();
 
