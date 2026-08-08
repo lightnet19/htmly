@@ -4844,7 +4844,7 @@ get('/:static', function ($static) {
         }
         die;
     } elseif ($static === 'login') {
-        if (session_status() == PHP_SESSION_NONE) session_start();
+        htmly_session_start();
         config('views.root', 'system/admin/views');
         render('login', array(
             'title' => generate_title('is_default', i18n('Login')),
