@@ -6,7 +6,7 @@ Format changelog ini mengikuti panduan [Keep a Changelog](https://keepachangelog
 
 ---
 
-## [Unreleased] - 2026-08-08
+## [v3.2.0] - 2026-08-08
 
 ### Added
 - **2026 Modernization Documentation Suite**:
@@ -28,3 +28,10 @@ Format changelog ini mengikuti panduan [Keep a Changelog](https://keepachangelog
 
 ### Security
 - **SECURITY.md Update**: Memperbarui kebijakan keamanan sesuai standar OWASP 2026.
+
+---
+
+## [v3.1.1] - 2024-05-10
+### Fixed
+- Arbitrary file deletion vulnerability patch (CVE-2024-34191).
+- Minor bug fixes & translation updates.

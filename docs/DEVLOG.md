@@ -4,12 +4,17 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
-## 📅 2026-08-08 — Contributing Guide & Local Documentation Portal
+## 📅 2026-08-08 — Version Bump to v3.2.0 (2026 Modern Edition Release)
 
-### 1. Standalone `CONTRIBUTING.md` Guide
-- Dibuat `CONTRIBUTING.md` resmi di akar repositori untuk menggantikan pengalihan ke URL eksternal.
-- Menyediakan panduan lengkap: Code of Conduct, alur Git & Pull Request, konvensi penamaan branch & commit message, aturan keamanan Flat-File, serta protokol kontribusi untuk **AI Agent**.
-- Memperbarui link `CONTRIBUTING.md` di `README.md`.
+### 1. Release Version Configuration
+- Memperbarui `HTMLY_VERSION` di `index.php` dari `v3.1.1` menjadi **`v3.2.0`**.
+- Memperbarui file versi cache `cache/installedVersion.json` menjadi `{"tag_name": "v3.2.0"}`.
+- Memperbarui `CHANGELOG.md` untuk menandai versi rilis **`[v3.2.0] - 2026-08-08`**.
+
+---
+
+## 📅 2026-08-08 — Contributing Guide & Local Documentation Portal
+- `CONTRIBUTING.md`: Panduan kontribusi resmi di akar repositori.
 
 ---
 
