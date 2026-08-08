@@ -4,11 +4,17 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
-## 📅 2026-08-08 — Post-Release Security Hardening (API Slug Path Traversal Guard)
+## 📅 2026-08-08 — Root `package.json` Orchestrator Addition
 
-### Path Sanitization Guard (`system/api/v1/pages.php` & `system/api/v1/posts.php`)
-- **Security Audit finding**: Menambahkan sanitasi karakter eksplisit pada parameter `$slug` di endpoint `DELETE /api/v1/pages/{slug}` dan `DELETE /api/v1/posts/{slug}` (`preg_replace('/[^a-zA-Z0-9_-]/', '', $slug)`).
-- Mencegah potensi serangan Path Traversal (CWE-22) melalui pemanipulasian karakter slug URL pada request API.
+### Root `package.json`
+- Menambahkan file **`package.json`** di akar repositori untuk menyediakan script orchestrator (`npm run start:mcp`).
+- Mempermudah pengembang dan AI Agent menjalankan MCP Server langsung dari root repositori tanpa merusak sifat utama HTMLy sebagai aplikasi berbasis PHP/Composer.
+- Memperbarui `robots.txt` untuk menyembunyikan `/package.json` dari crawler web publik.
+
+---
+
+## 📅 2026-08-08 — Post-Release Security Hardening (API Slug Path Traversal Guard)
+- Path Traversal Guard pada parameter `$slug` di endpoint `DELETE /api/v1/pages/{slug}` dan `DELETE /api/v1/posts/{slug}`.
 
 ---
 

@@ -18,6 +18,7 @@ Disallow: /mcp-server/
 Disallow: /composer.json
 Disallow: /composer.lock
 Disallow: /composer.phar
+Disallow: /package.json
 
 # Disallow admin panel
 Disallow: /admin/
