@@ -117,11 +117,17 @@ function api_delete_post($slug)
         api_error('Slug is required', 400, 'MISSING_SLUG');
     }
 
+    // Sanitize slug to prevent path manipulation
+    $cleanSlug = strtolower(preg_replace('/[^a-zA-Z0-9_-]/', '', $slug));
+    if (empty($cleanSlug)) {
+        api_error('Invalid slug parameter', 400, 'INVALID_SLUG');
+    }
+
     $posts = get_all_posts();
     $targetFile = null;
 
     foreach ($posts as $p) {
-        if (($p['slug'] ?? '') === $slug) {
+        if (($p['slug'] ?? '') === $cleanSlug) {
             $targetFile = $p['file'] ?? null;
             break;
         }

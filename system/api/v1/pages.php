@@ -85,7 +85,13 @@ function api_delete_page($slug)
         api_error('Slug is required', 400, 'MISSING_SLUG');
     }
 
-    $file = 'content/pages/' . $slug . '.md';
+    // Sanitize slug to prevent path traversal attacks (CWE-22)
+    $cleanSlug = strtolower(preg_replace('/[^a-zA-Z0-9_-]/', '', $slug));
+    if (empty($cleanSlug)) {
+        api_error('Invalid slug parameter', 400, 'INVALID_SLUG');
+    }
+
+    $file = 'content/pages/' . $cleanSlug . '.md';
     if (!file_exists($file)) {
         api_error('Page not found', 404, 'NOT_FOUND');
     }

@@ -4,12 +4,16 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
-## 📅 2026-08-08 — Version Bump to v3.2.0 (2026 Modern Edition Release)
+## 📅 2026-08-08 — Post-Release Security Hardening (API Slug Path Traversal Guard)
 
-### 1. Release Version Configuration
-- Memperbarui `HTMLY_VERSION` di `index.php` dari `v3.1.1` menjadi **`v3.2.0`**.
-- Memperbarui file versi cache `cache/installedVersion.json` menjadi `{"tag_name": "v3.2.0"}`.
-- Memperbarui `CHANGELOG.md` untuk menandai versi rilis **`[v3.2.0] - 2026-08-08`**.
+### Path Sanitization Guard (`system/api/v1/pages.php` & `system/api/v1/posts.php`)
+- **Security Audit finding**: Menambahkan sanitasi karakter eksplisit pada parameter `$slug` di endpoint `DELETE /api/v1/pages/{slug}` dan `DELETE /api/v1/posts/{slug}` (`preg_replace('/[^a-zA-Z0-9_-]/', '', $slug)`).
+- Mencegah potensi serangan Path Traversal (CWE-22) melalui pemanipulasian karakter slug URL pada request API.
+
+---
+
+## 📅 2026-08-08 — Version Bump to v3.2.0 (2026 Modern Edition Release)
+- Memperbarui `HTMLY_VERSION` di `index.php` dan `cache/installedVersion.json` menjadi **`v3.2.0`**.
 
 ---
 
