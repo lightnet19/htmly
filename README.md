@@ -8,9 +8,9 @@
 [![PHP Version](https://img.shields.io/badge/PHP-8.1%2B%20%7C%207.4-777BB4.svg?logo=php)](https://www.php.net/)
 [![API Status](https://img.shields.io/badge/REST%20API-v1%20Full%20Coverage-success.svg)](#-rest-api--automation)
 [![MCP Ready](https://img.shields.io/badge/MCP-Server%20Ready-brightgreen.svg)](#-model-context-protocol-mcp)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://www.htmly.com/contributing)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-[Website](https://www.htmly.com/) • [Documentation](https://docs.htmly.com/) • [Live Demo](https://www.htmly.com/demo) • [Contributing](https://www.htmly.com/contributing)
+[Website](https://www.htmly.com/) • [Documentation](https://docs.htmly.com/) • [Live Demo](https://www.htmly.com/demo) • [Contributing](CONTRIBUTING.md)
 
 ---
 
