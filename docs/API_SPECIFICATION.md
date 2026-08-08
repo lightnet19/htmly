@@ -1,4 +1,4 @@
-# HTMLy REST API Specification (v1)
+# HTMLy REST API Specification (v1 - Full Coverage)
 
 API ini dirancang stateless dengan format respon JSON standar untuk mempermudah konsumsi oleh **n8n**, **Custom Webhooks**, dan **MCP Servers**.
 
@@ -13,79 +13,40 @@ Content-Type: application/json
 
 ---
 
-## 📌 Endpoints Summary
+## 📌 Complete Endpoints Matrix
 
 ### 1. Posts & Drafts
 
-#### `GET /api/v1/posts`
-Mengambil daftar postingan.
-- **Query Params**:
-  - `status`: `published` | `draft` | `scheduled` (default: `published`)
-  - `page`: integer (default: `1`)
-  - `limit`: integer (default: `10`)
-  - `tag`: string (optional)
-  - `category`: string (optional)
+| Method | Endpoint | Deskripsi |
+|--------|----------|-----------|
+| `GET` | `/api/v1/posts` | Mengambil daftar postingan/draft (`?status=published\|draft&page=1&limit=10`). |
+| `POST` | `/api/v1/posts` | Membuat postingan atau draft baru. |
+| `DELETE` | `/api/v1/posts/{slug}` | Menghapus postingan/draft berdasarkan slug. |
 
-**Response 200 OK**:
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "2026-08-08-post-slug",
-      "title": "Judul Artikel",
-      "slug": "post-slug",
-      "url": "https://example.com/post/post-slug",
-      "status": "published",
-      "date": "2026-08-08 10:00:00",
-      "category": "tech",
-      "tags": ["ai", "php"],
-      "content": "Isi markdown..."
-    }
-  ],
-  "pagination": {
-    "current_page": 1,
-    "total_pages": 5,
-    "total_items": 45
-  }
-}
-```
+### 2. Static Pages
 
-#### `POST /api/v1/posts`
-Membuat postingan atau draft baru.
-- **Request Body**:
-```json
-{
-  "title": "Masa Depan AI Agent di 2026",
-  "content": "Isi lengkap artikel Markdown...",
-  "category": "technology",
-  "tags": "ai, automation, n8n",
-  "status": "published", 
-  "description": "Meta deskripsi singkat..."
-}
-```
+| Method | Endpoint | Deskripsi |
+|--------|----------|-----------|
+| `GET` | `/api/v1/pages` | Mengambil seluruh halaman statis. |
+| `POST` | `/api/v1/pages` | Membuat halaman statis baru. |
+| `DELETE` | `/api/v1/pages/{slug}` | Menghapus halaman statis berdasarkan slug. |
 
-#### `GET /api/v1/posts/{slug}`
-Mengambil detail satu postingan berdasarkan slug.
+### 3. Categories & Tags Taxonomy
 
-#### `PUT /api/v1/posts/{slug}`
-Memperbarui postingan yang sudah ada.
+| Method | Endpoint | Deskripsi |
+|--------|----------|-----------|
+| `GET` | `/api/v1/categories` | Mengambil daftar seluruh kategori. |
+| `POST` | `/api/v1/categories` | Membuat kategori baru. |
+| `GET` | `/api/v1/tags` | Mengambil daftar tag cloud. |
 
-#### `DELETE /api/v1/posts/{slug}`
-Menghapus postingan/draft berdasarkan slug.
+### 4. Media Upload
 
----
+| Method | Endpoint | Deskripsi |
+|--------|----------|-----------|
+| `POST` | `/api/v1/media/upload` | Upload gambar/file media via Multipart Request (`file` field). |
 
-### 2. Media Upload
+### 5. System Health & Telemetry
 
-#### `POST /api/v1/media/upload`
-Upload file gambar/media (Multipart Form-Data).
-- **Request**: `file` (binary)
-- **Response**:
-```json
-{
-  "success": true,
-  "file_url": "https://example.com/content/uploads/2026/08/image.png",
-  "markdown_snippet": "![image.png](https://example.com/content/uploads/2026/08/image.png)"
-}
-```
+| Method | Endpoint | Deskripsi |
+|--------|----------|-----------|
+| `GET` | `/api/v1/system/health` | Telemetri kesehatan sistem (PHP version, disk space, total posts/drafts/pages, cache size). |
