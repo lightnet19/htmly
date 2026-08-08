@@ -2928,8 +2928,10 @@ post('/admin/users/:username/edit', function () {
                         "encryption = password_hash\n" .
                         "role = " . $user_role . "\n", LOCK_EX);
                 } else {
-                    update_user($username, $new_password, $user_role);
+                    $mfa_secret = user('mfa_secret', $username) ?? 'disabled';
+                    update_user($username, $new_password, $user_role, $mfa_secret);
                 }
+
             }
             $redir = site_url() . 'admin/users';
             header("location: $redir");  
@@ -3893,8 +3895,8 @@ get('/category/:category/delete', function ($category) {
                 'breadcrumb' => '<a href="' . site_url() . '">' . config('breadcrumb.home') . '</a> &#187; ' . i18n('Category') . ': ' . $post->title,
                 'p' => $post,
                 'static' => $post,
-                'type' => 'categoryPage',
             ));
+
         } else {
             render('denied', array(
                 'title' => generate_title('is_default', i18n('Denied')),
@@ -4283,9 +4285,9 @@ get('/search/:keyword', function ($keyword) {
             'metatags' => generate_meta(null, null),
             'search' => '',
             'breadcrumb' => '<a href="' . site_url() . '">' . config('breadcrumb.home') . '</a> &#187; ' . i18n('No_search_results'),
-            'canonical' => site_url(),
             'bodyclass' => 'error-404-search',
             'is_404search' => true,
+
         ), $layout);
         die;
     }
