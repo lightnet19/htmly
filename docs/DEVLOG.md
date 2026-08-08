@@ -4,7 +4,16 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
+## 📅 2026-08-08 — Final Hardening, Config Templates & Pull Request #1062 Submission
+- **Pull Request Submission**: Created & submitted official PR **#1062** on upstream `danpros/htmly` (`feat(core): HTMLy 2026 Modernization Release v3.2.0 - Security, REST API v1, MCP Server, Webhooks, Admin UI & Fixes`).
+- **`install.php` & `upload.php` Security Hardening**: Migrated user setup to BCRYPT `password_hash()`, sanitized upload filenames against path traversal, and added timeout-protected HTTPS IP/timezone requests.
+- **Apache 2.4 `.htaccess` Hardening**: Updated root, `config/`, and `system/includes/` `.htaccess` files with dual Apache 2.4 (`Require all denied`) and 2.2 support, session cookie hardening (`HttpOnly`, `SameSite=Strict`, `Secure`), and `Authorization` Bearer token preservation.
+- **Config Templates & IDE Clean-up**: Added `config/api_keys.ini.example` and `config/webhooks.ini.example`, updated `config/users/username.ini.example`, and fixed core function warnings in `system/htmly.php`.
+
+---
+
 ## 📅 2026-08-08 — Root `package.json` Orchestrator Addition
+
 
 ### Root `package.json`
 - Menambahkan file **`package.json`** di akar repositori untuk menyediakan script orchestrator (`npm run start:mcp`).
