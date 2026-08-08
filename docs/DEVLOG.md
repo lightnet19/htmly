@@ -4,27 +4,32 @@ Dokumen ini mencatat keputusan arsitektur, log aktivitas pengembangan harian, da
 
 ---
 
+## 📅 2026-08-08 — Phase 4: Modern Admin UI/UX & Command Palette (Ctrl+K)
+
+### 1. Modern Design System (`system/resources/css/admin-2026.css`)
+- Mengimplementasikan sistem warna HSL adaptif terhadap preferensi OS (`prefers-color-scheme: dark`).
+- Menambahkan efek Glassmorphism (`backdrop-filter: blur(12px)`), elevasi bayangan halus, dan mikro-animasi pada permukaan admin.
+- Menambahkan badge status berwarna cerah (Published/Draft/Scheduled).
+
+### 2. Command Palette Module (`system/resources/js/command-palette.js`)
+- Mengimplementasikan modal navigasi cepat yang dipicu oleh shortcut keyboard `Ctrl+K` atau `Cmd+K`.
+- Menyediakan navigasi instan untuk pencarian aksi, membuat postingan/halaman baru, mengelola draft, kategori, komentar, dan konfigurasi.
+
+### 3. Layout Integration (`system/admin/views/layout.html.php`)
+- Menautkan `admin-2026.css` pada `<head>`.
+- Menambahkan tombol indikator `Ctrl+K` pada top navbar.
+- Menautkan `command-palette.js` pada footer.
+
+---
+
 ## 📅 2026-08-08 — Phase 3: Automation Webhooks & MCP Server Package
-
-### 1. Webhook Event Dispatcher (`system/core/Webhook.php`)
-- **`config/webhooks.ini`**: Konfigurasi URL Webhook (misalnya endpoint n8n Webhook Trigger).
-- **`system/core/Webhook.php`**: Mengimplementasikan `dispatch_webhook_event($event, $payload)` non-blocking cURL/Stream Context dispatcher untuk mengirim peristiwa HTTP POST saat post dipublish/dihapus.
-
-### 2. Standalone MCP Server Package (`mcp-server/`)
-- Membangun executable Node.js MCP Server resmi berbasis Stdio JSON-RPC.
-- Menyediakan tools: `htmly_publish_post`, `htmly_list_posts`, `htmly_delete_post`, `htmly_get_system_health`.
-- Memungkinkan AI Agent (**Hermes-Agent**, **OpenClaw**, **Antigravity**, **Cursor**) terhubung langsung ke HTMLy secara otonom.
+- `system/core/Webhook.php` & `config/webhooks.ini`: Non-blocking cURL dispatcher.
+- `mcp-server/`: Official Node.js MCP Server package (`index.js`).
 
 ---
 
 ## 📅 2026-08-08 — Phase 2 Ext: Full Coverage REST API v1 Suite
-
-### Complete API Endpoints Suite (`system/api/v1/`)
-- `pages.php`: Pages API controller.
-- `taxonomy.php`: Categories & Tags API controller.
-- `media.php`: Media Upload API controller.
-- `system.php`: Telemetry & Health API controller.
-- `router.php`: Full API router.
+- Full API Controllers: `posts.php`, `pages.php`, `taxonomy.php`, `media.php`, `system.php`, `router.php`.
 
 ---
 
