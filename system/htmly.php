@@ -25,6 +25,13 @@ publish_scheduled();
 // Load theme settings
 theme_settings();
 
+// REST API v1 Router Interceptor
+$requestUri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+if (strpos($requestUri, '/api/v1') !== false) {
+    require_once __DIR__ . '/api/v1/router.php';
+    handle_api_v1_request($requestUri, $_SERVER['REQUEST_METHOD'] ?? 'GET');
+}
+
 // The front page of the blog
 get('/index', function () {
 
